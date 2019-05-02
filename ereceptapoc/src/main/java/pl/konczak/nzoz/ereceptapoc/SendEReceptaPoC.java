@@ -9,6 +9,9 @@ import pl.konczak.nzoz.ereceptapoc.factory.EReceptaTemplateFactory;
 import pl.konczak.nzoz.ereceptapoc.keystore.PrivateKeyData;
 import pl.konczak.nzoz.ereceptapoc.util.XmlHelper;
 
+import java.nio.charset.Charset;
+import java.util.Base64;
+
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -34,7 +37,13 @@ public class SendEReceptaPoC {
 
         Document xmlWithSignedErecepta = sign(xmlWithErecepta);
 
-        log.info("xmlWithSignedErecepta <{}>", XmlHelper.convertDocumentToString(xmlWithSignedErecepta));
+        String stringWithSignedErecepta = XmlHelper.convertDocumentToString(xmlWithSignedErecepta);
+        log.debug("xmlWithSignedErecepta <{}>", stringWithSignedErecepta);
+
+        byte[] bytesEncoded = Base64.getEncoder().encode(stringWithSignedErecepta.getBytes(Charset.forName("UTF-8")));
+
+        log.info("encodedErecepta <{}>", new String(bytesEncoded));
+
     }
 
     private Document sign(final Document xmlWithErecepta) throws Exception {
