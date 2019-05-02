@@ -33,6 +33,7 @@ public class EreceptapocApplication
         implements CommandLineRunner {
 
     private final ClientAuthorizationPoC clientAuthorizationPoC;
+    private final SendEReceptaPoC sendEReceptaPoC;
 
     public static void main(String[] args) {
         SpringApplication.run(EreceptapocApplication.class, args);
@@ -40,7 +41,16 @@ public class EreceptapocApplication
 
     @Override
     public void run(String... args) {
-        first();
+//        first();
+        second();
+    }
+
+    private void second() {
+        try {
+            sendEReceptaPoC.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void first() {
