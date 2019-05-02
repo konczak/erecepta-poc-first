@@ -25,6 +25,7 @@ public class SendEReceptaPoC {
     private final EReceptaFactory eReceptaFactory;
     private final ZapisReceptSoapRequestBodyTemplateFactory zapisReceptSoapRequestBodyTemplateFactory;
     private final ZapisReceptSoapRequestBodyFactory zapisReceptSoapRequestBodyFactory;
+    private final CsiozClient csiozClient;
 
     public void execute() throws Exception {
         String ereceptaTemplate = eReceptaTemplateFactory.getEReceptaTemplate();
@@ -55,7 +56,9 @@ public class SendEReceptaPoC {
 
         String soapRequestBody = zapisReceptSoapRequestBodyFactory.fillRequestBody(zapisReceptSoapRequestBodyTemplate, stringEncodedSingedErecepta);
 
-        log.info("soapRequestBody <{}>", soapRequestBody);
+        log.debug("soapRequestBody <{}>", soapRequestBody);
+
+        csiozClient.sendZapiszRecepty(soapRequestBody);
     }
 
     private Document sign(final Document xmlWithErecepta) throws Exception {
