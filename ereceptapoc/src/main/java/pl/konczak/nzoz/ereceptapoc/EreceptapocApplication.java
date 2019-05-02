@@ -1,5 +1,7 @@
 package pl.konczak.nzoz.ereceptapoc;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -25,11 +27,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @Slf4j
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 @SpringBootApplication
 public class EreceptapocApplication
         implements CommandLineRunner {
 
-    private static final String TEST_URL = "https://client.example.com:8443";
+    private final ClientAuthorizationPoC clientAuthorizationPoC;
 
     public static void main(String[] args) {
         SpringApplication.run(EreceptapocApplication.class, args);
@@ -37,8 +40,12 @@ public class EreceptapocApplication
 
     @Override
     public void run(String... args) {
+        first();
+    }
+
+    private void first() {
         try {
-            gzi();
+            clientAuthorizationPoC.gzi();
         } catch (GeneralSecurityException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -46,35 +53,5 @@ public class EreceptapocApplication
         }
     }
 
-
-    public void gzi() throws GeneralSecurityException, IOException {
-        Path clientCertStore = Paths.get("C:\\work\\p1\\e-recepty\\poc\\clientcertstore.pfx");
-        Path trustedCaStore = Paths.get("C:\\work\\p1\\e-recepty\\poc\\trustedcastore.jks");
-
-        SSLContext sslContext = SSLContexts.custom()
-                .loadKeyMaterial(clientCertStore.toFile(), "gucio".toCharArray(), "gucio".toCharArray())
-                .loadTrustMaterial(trustedCaStore.toFile(), "trusted".toCharArray())
-                .build();
-        try (CloseableHttpClient httpclient = HttpClients
-                .custom().setSSLContext(sslContext).build();
-             CloseableHttpResponse closeableHttpResponse = httpclient.execute(
-                     new HttpGet(URI.create(TEST_URL)))) {
-            log.info(closeableHttpResponse.getStatusLine().toString());
-            HttpEntity entity = closeableHttpResponse.getEntity();
-            try (InputStream content = entity.getContent();
-                 ReadableByteChannel src = Channels.newChannel(content);
-                 WritableByteChannel dest = Channels.newChannel(System.out)) {
-                ByteBuffer buffer = ByteBuffer.allocateDirect(16 * 1024);
-                while (src.read(buffer) != -1) {
-                    buffer.flip();
-                    dest.write(buffer);
-                    buffer.compact();
-                }
-                buffer.flip();
-                while (buffer.hasRemaining())
-                    dest.write(buffer);
-            }
-        }
-    }
 
 }
