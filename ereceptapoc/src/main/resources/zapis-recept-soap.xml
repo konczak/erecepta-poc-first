@@ -1,0 +1,39 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v20="http://csioz.gov.pl/p1/erecepta/ws/v20170510" xmlns:v201="http://csioz.gov.pl/p1/kontekst/mt/v20170510" xmlns:v202="http://csioz.gov.pl/p1/erecepta/mt/v20170510">
+   <soapenv:Header>
+     <v201:kontekstWywolania>
+		   <v201:atrybut nazwa="urn:csioz:p1:erecepta:kontekst:idPodmiotuOidRoot">
+		      <v201:wartosc>@@idBiznesowePodmiotuRoot@@</v201:wartosc>
+		   </v201:atrybut>
+		   <v201:atrybut nazwa="urn:csioz:p1:erecepta:kontekst:idPodmiotuOidExt">
+		      <v201:wartosc>@@idBiznesowePodmiotuExt@@</v201:wartosc>
+		   </v201:atrybut>
+		   <v201:atrybut nazwa="urn:csioz:p1:erecepta:kontekst:idUzytkownikaOidRoot">
+		      <v201:wartosc>@@idPracownikaRoot@@</v201:wartosc>
+		   </v201:atrybut>   
+		   <v201:atrybut nazwa="urn:csioz:p1:erecepta:kontekst:idUzytkownikaOidExt">
+		      <v201:wartosc>@@idPracownikaExt@@</v201:wartosc>
+		   </v201:atrybut>
+		   <v201:atrybut nazwa="urn:csioz:p1:erecepta:kontekst:idMiejscaPracyOidRoot">
+		      <v201:wartosc>@@idMiejscaPracyRoot@@</v201:wartosc>
+		   </v201:atrybut>         
+		   <v201:atrybut nazwa="urn:csioz:p1:erecepta:kontekst:idMiejscaPracyOidExt">
+		      <v201:wartosc>@@idMiejscaPracyExt@@</v201:wartosc>
+		   </v201:atrybut>                 
+		   <v201:atrybut nazwa="urn:csioz:p1:erecepta:kontekst:rolaBiznesowa">
+			      <v201:wartosc>@@rolaBiznesowa@@</v201:wartosc>
+		   </v201:atrybut>
+		</v201:kontekstWywolania>
+   </soapenv:Header>
+   <soapenv:Body>
+      <v20:ZapisPakietuReceptRequest>
+         <pakietRecept>
+            <v202:recepty>
+               <v202:recepta>
+                  <v202:identyfikatorDokumentuWPakiecie>1</v202:identyfikatorDokumentuWPakiecie>
+                  <v202:tresc>@@recepta@@</v202:tresc>
+               </v202:recepta>
+            </v202:recepty>
+         </pakietRecept>
+      </v20:ZapisPakietuReceptRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

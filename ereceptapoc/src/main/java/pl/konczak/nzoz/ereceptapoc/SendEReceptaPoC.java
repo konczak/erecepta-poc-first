@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.w3c.dom.Document;
 import pl.konczak.nzoz.ereceptapoc.factory.EReceptaFactory;
 import pl.konczak.nzoz.ereceptapoc.factory.EReceptaTemplateFactory;
+import pl.konczak.nzoz.ereceptapoc.factory.ZapisReceptSoapRequestBodyFactory;
+import pl.konczak.nzoz.ereceptapoc.factory.ZapisReceptSoapRequestBodyTemplateFactory;
 import pl.konczak.nzoz.ereceptapoc.keystore.PrivateKeyData;
 import pl.konczak.nzoz.ereceptapoc.util.XmlHelper;
 
@@ -21,6 +23,8 @@ public class SendEReceptaPoC {
 
     private final EReceptaTemplateFactory eReceptaTemplateFactory;
     private final EReceptaFactory eReceptaFactory;
+    private final ZapisReceptSoapRequestBodyTemplateFactory zapisReceptSoapRequestBodyTemplateFactory;
+    private final ZapisReceptSoapRequestBodyFactory zapisReceptSoapRequestBodyFactory;
 
     public void execute() throws Exception {
         String ereceptaTemplate = eReceptaTemplateFactory.getEReceptaTemplate();
@@ -40,10 +44,18 @@ public class SendEReceptaPoC {
         String stringWithSignedErecepta = XmlHelper.convertDocumentToString(xmlWithSignedErecepta);
         log.debug("xmlWithSignedErecepta <{}>", stringWithSignedErecepta);
 
-        byte[] bytesEncoded = Base64.getEncoder().encode(stringWithSignedErecepta.getBytes(Charset.forName("UTF-8")));
+        byte[] bytesEncodedSignedErecepta = Base64.getEncoder().encode(stringWithSignedErecepta.getBytes(Charset.forName("UTF-8")));
 
-        log.info("encodedErecepta <{}>", new String(bytesEncoded));
+        String stringEncodedSingedErecepta = new String(bytesEncodedSignedErecepta);
+        log.debug("encodedErecepta <{}>", stringEncodedSingedErecepta);
 
+        String zapisReceptSoapRequestBodyTemplate = zapisReceptSoapRequestBodyTemplateFactory.getZapisReceptSoapRequestBodyTemplate();
+
+        log.debug("zapisReceptSoapRequestBodyTemplate <{}>", zapisReceptSoapRequestBodyTemplate);
+
+        String soapRequestBody = zapisReceptSoapRequestBodyFactory.fillRequestBody(zapisReceptSoapRequestBodyTemplate, stringEncodedSingedErecepta);
+
+        log.info("soapRequestBody <{}>", soapRequestBody);
     }
 
     private Document sign(final Document xmlWithErecepta) throws Exception {
