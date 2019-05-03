@@ -40,7 +40,7 @@ public class SendEReceptaPoC {
 
         log.debug("xmlWithErecepta <{}>", XmlHelper.convertDocumentToString(xmlWithErecepta));
 
-        Document xmlWithSignedErecepta = sign(xmlWithErecepta);
+        Document xmlWithSignedErecepta = signAsDoctor(xmlWithErecepta);
 
         String stringWithSignedErecepta = XmlHelper.convertDocumentToString(xmlWithSignedErecepta);
         log.debug("xmlWithSignedErecepta <{}>", stringWithSignedErecepta);
@@ -61,8 +61,11 @@ public class SendEReceptaPoC {
         csiozClient.sendZapiszRecepty(soapRequestBody);
     }
 
-    private Document sign(final Document xmlWithErecepta) throws Exception {
-        PrivateKeyData privateKeyData = new PrivateKeyData();
+    private Document signAsDoctor(final Document xmlWithErecepta) throws Exception {
+        PrivateKeyData privateKeyData = new PrivateKeyData(
+                "C:\\work\\p1\\e-recepty\\KOMPLET_DANYCH_SZPL_NR_106\\Adam106 Leczniczy.p12",
+                "UXG9DxASCm",
+                "UXG9DxASCm");
         XmlSigner xmlSigner = new XmlSigner(privateKeyData);
 
         return xmlSigner.sign(xmlWithErecepta);
