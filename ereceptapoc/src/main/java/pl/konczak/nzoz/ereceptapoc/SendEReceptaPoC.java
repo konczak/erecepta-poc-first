@@ -63,7 +63,7 @@ public class SendEReceptaPoC {
 
     private Document signAsDoctor(final Document xmlWithErecepta) throws Exception {
         PrivateKeyData privateKeyData = new PrivateKeyData(
-                "C:\\work\\p1\\e-recepty\\KOMPLET_DANYCH_SZPL_NR_106\\Adam106 Leczniczy.p12",
+                "d:\\programowanie\\zarnow\\nzoz\\e-recepty\\KOMPLET_DANYCH_SZPL_NR_106\\Adam106 Leczniczy.p12",
                 "UXG9DxASCm",
                 "UXG9DxASCm");
         XmlSigner xmlSigner = new XmlSigner(privateKeyData);

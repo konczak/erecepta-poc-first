@@ -32,20 +32,20 @@ public class CsiozClient {
     private final Path trustedCaStore;
 
     public CsiozClient() {
-        clientCertStore = Paths.get("C:\\work\\p1\\e-recepty\\KOMPLET_DANYCH_SZPL_NR_106\\Projekt_testow_soapui_dla_uslug_P2_e-Recepta_P2I6.1_20190416\\keys\\Podmiot_leczniczy_106-tls.p12");
-        trustedCaStore = Paths.get("C:\\work\\p1\\e-recepty\\KOMPLET_DANYCH_SZPL_NR_106\\Projekt_testow_soapui_dla_uslug_P2_e-Recepta_P2I6.1_20190416\\keys\\Podmiot_leczniczy_106-wss.p12");
+        clientCertStore = Paths.get("d:\\programowanie\\zarnow\\nzoz\\e-recepty\\KOMPLET_DANYCH_SZPL_NR_106\\Podmiot_leczniczy_106-tls.p12");
+        trustedCaStore = Paths.get("d:\\programowanie\\zarnow\\nzoz\\e-recepty\\KOMPLET_DANYCH_SZPL_NR_106\\Podmiot_leczniczy_106-wss.p12");
     }
 
     public String sendZapiszRecepty(String zapiszReceptyRequestBody) throws Exception {
         KeyStore clientStore = KeyStore.getInstance("PKCS12");
-        clientStore.load(new FileInputStream("C:\\work\\p1\\e-recepty\\KOMPLET_DANYCH_SZPL_NR_106\\Projekt_testow_soapui_dla_uslug_P2_e-Recepta_P2I6.1_20190416\\keys\\Podmiot_leczniczy_106-tls.p12"), "UXG9DxASCm".toCharArray());
+        clientStore.load(new FileInputStream("d:\\programowanie\\zarnow\\nzoz\\e-recepty\\KOMPLET_DANYCH_SZPL_NR_106\\Podmiot_leczniczy_106-tls.p12"), "UXG9DxASCm".toCharArray());
 
         KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
         kmf.init(clientStore, "UXG9DxASCm".toCharArray());
         KeyManager[] kms = kmf.getKeyManagers();
 
         KeyStore trustStore = KeyStore.getInstance("JKS");
-        trustStore.load(new FileInputStream("C:\\work\\p1\\e-recepty\\KOMPLET_DANYCH_SZPL_NR_106\\Projekt_testow_soapui_dla_uslug_P2_e-Recepta_P2I6.1_20190416\\keys\\csiozTrustStore.jks"), "changeit".toCharArray());
+        trustStore.load(new FileInputStream("d:\\programowanie\\zarnow\\nzoz\\e-recepty\\KOMPLET_DANYCH_SZPL_NR_106\\csiozTrustStore.jks"), "changeit".toCharArray());
 
         TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
         tmf.init(trustStore);
