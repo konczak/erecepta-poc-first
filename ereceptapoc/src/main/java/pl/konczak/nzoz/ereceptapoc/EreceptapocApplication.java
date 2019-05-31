@@ -3,28 +3,17 @@ package pl.konczak.nzoz.ereceptapoc;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.ssl.SSLContexts;
-
-import javax.net.ssl.SSLContext;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.nio.ByteBuffer;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.nio.channels.WritableByteChannel;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.security.GeneralSecurityException;
-
+import org.apache.commons.codec.binary.Hex;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.*;
+import java.security.cert.Certificate;
+import java.util.Enumeration;
 
 @Slf4j
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
@@ -42,7 +31,9 @@ public class EreceptapocApplication
     @Override
     public void run(String... args) {
 //        first();
-        second();
+//        second();
+//        third();
+        fourth();
     }
 
     private void second() {
@@ -63,5 +54,44 @@ public class EreceptapocApplication
         }
     }
 
+    private void third() {
+        try {
+            for (Provider provider : Security.getProviders()) {
+                log.info("{}", provider.getInfo());
+            }
+
+            SecureRandom secureRandom = SecureRandom.getInstanceStrong();
+
+            byte[] secrets = new byte[10];
+            secureRandom.nextBytes(secrets);
+
+            for (byte secret : secrets) {
+                log.info("{}", secret);
+            }
+
+            log.info("Hex encoded {}", Hex.encodeHexString(secrets));
+
+            //TODO how to recreate original byte array from String?
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void fourth() {
+        try {
+            InputStream certIs = new FileInputStream("d:\\programowanie\\zarnow\\nzoz\\e-recepty\\KOMPLET_DANYCH_SZPL_NR_106\\Adam106 Leczniczy.p12");
+            KeyStore ks = KeyStore.getInstance("PKCS12");
+            ks.load(certIs, "UXG9DxASCm".toCharArray());
+            Enumeration<String> enumeration = ks.aliases();
+            while (enumeration.hasMoreElements()) {
+                String alias = enumeration.nextElement();
+                System.out.println(alias);
+                Certificate certificate = ks.getCertificate(alias);
+                System.out.println(certificate);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
