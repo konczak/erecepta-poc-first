@@ -12,8 +12,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.*;
+import java.security.cert.CertPath;
 import java.security.cert.Certificate;
+import java.security.cert.CertificateFactory;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Enumeration;
+import java.util.List;
 
 @Slf4j
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
@@ -102,6 +107,21 @@ public class EreceptapocApplication
                     System.out.println("finito");
                 }
             }
+
+            System.out.println("-------- CertPath: ---------");
+            enumeration = ks.aliases();
+            while (enumeration.hasMoreElements()) {
+                String alias = enumeration.nextElement();
+                System.out.println(alias);
+                List<Certificate> certificates = Arrays.asList(ks.getCertificateChain(alias));
+                CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
+                CertPath certPath = certificateFactory.generateCertPath(certificates);
+                System.out.println("certPath");
+                System.out.println(certPath);
+                //reversing order of certificates in array generates invalid CertPath
+            }
+
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
