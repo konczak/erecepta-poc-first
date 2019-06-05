@@ -79,7 +79,8 @@ public class EreceptapocApplication
 
     private void fourth() {
         try {
-            InputStream certIs = new FileInputStream("d:\\programowanie\\zarnow\\nzoz\\e-recepty\\KOMPLET_DANYCH_SZPL_NR_106\\Adam106 Leczniczy.p12");
+            // InputStream certIs = new FileInputStream("d:\\programowanie\\zarnow\\nzoz\\e-recepty\\KOMPLET_DANYCH_SZPL_NR_106\\Adam106 Leczniczy.p12");
+            InputStream certIs = new FileInputStream("d:\\programowanie\\zarnow\\nzoz\\e-recepty\\KOMPLET_DANYCH_SZPL_NR_106\\Podmiot_leczniczy_106-tls.p12");
             KeyStore ks = KeyStore.getInstance("PKCS12");
             ks.load(certIs, "UXG9DxASCm".toCharArray());
             Enumeration<String> enumeration = ks.aliases();
@@ -88,6 +89,18 @@ public class EreceptapocApplication
                 System.out.println(alias);
                 Certificate certificate = ks.getCertificate(alias);
                 System.out.println(certificate);
+            }
+
+            System.out.println("-------- chain: ---------");
+            enumeration = ks.aliases();
+            while (enumeration.hasMoreElements()) {
+                String alias = enumeration.nextElement();
+                System.out.println(alias);
+                Certificate[] certificateChain = ks.getCertificateChain(alias);
+                for (Certificate certificate : certificateChain) {
+                    System.out.println(certificate);
+                    System.out.println("finito");
+                }
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
