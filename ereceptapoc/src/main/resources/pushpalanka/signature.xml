@@ -1,0 +1,88 @@
+<soap:Envelope xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:pj="http://www.pjxml.org/namespaces/messageHeader" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance">
+    <soap:Header>
+        <pj:MessageHeader pj:version="1.0" soap:mustUnderstand="1">
+            <pj:From>
+                <pj:PartyId pj:type="ABCDE">FUN</pj:PartyId>
+            </pj:From>
+            <pj:To>
+                <pj:PartyId pj:type="ABCDE">PARTY</pj:PartyId>
+            </pj:To>
+            <pj:CPAId>uri:www.pjxml.org/socialService/Ping</pj:CPAId>
+            <pj:ConversationId>FUN PARTY FUN 59c64t0087fg3kfs000003n9</pj:ConversationId>
+            <pj:Service>uri:www.pjxml.org/socialService/</pj:Service>
+            <pj:Action>Ping</pj:Action>
+            <pj:MessageData>
+                <pj:MessageId>FUN 59c64t0087fg3kfs000003n9</pj:MessageId>
+                <pj:Timestamp>2013-10-22T17:12:20</pj:Timestamp>
+            </pj:MessageData>
+        </pj:MessageHeader>
+        <pj:Via pj:id="59c64t0087fg3ki6000003na" pj:syncReply="False" pj:version="1.0" soap:actor="http://schemas.xmlsoap.org/soap/actor/next" soap:mustUnderstand="1">
+            <pj:Service>uri:www.pjxml.org/socialService/</pj:Service>
+            <pj:Action>Ping</pj:Action>
+        </pj:Via>
+    <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:SignedInfo>
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:CanonicalizationMethod>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></ds:SignatureMethod>
+<ds:Reference URI="">
+
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+<ds:DigestValue>9RXY9kp/Klx36gd4BULvST4qffI=</ds:DigestValue>
+</ds:Reference>
+<ds:Reference URI="../resources/attachment.xml">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:Transform>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+<ds:DigestValue>3JcccO8+0bCUUR3EJxGJKJ+Wrbc=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue>
+kHxkXuk1UlBL2Ieb98xd+PbNgXBBHBWdGCyKR4E/ha5CZDg/xcQ7gENvUjed6tPkAMEMLQlm7Hz5
+w2bwdH0djsSXgTKMPRqjnzymEnvrO9qCBpdmhf/tFQ8Lc+KfeEPxBtS4onbL0/7Aenx6XxvEQwjI
+sW9hBU/9C3Vi8YEqGdXUpVmd0hBQLIvZ4fwUZlrsDLDZojvwK2DVaznrvSoA/JTjnS7XZ5oMplN9
+THX4xzZap3+WhXwI2xMr3GKOZhzBPlEwUx7u+PQz1UepcbKY3BsO8jB3dxWN6r+F4qTyWa+xwOFx
+qLj546WX35f8zT4GLdiJI5oiYeo1YPLFFqTrwg==
+</ds:SignatureValue>
+<ds:KeyInfo>
+<ds:X509Data>
+<ds:X509Certificate>
+MIIDjTCCAnWgAwIBAgIEeotzFjANBgkqhkiG9w0BAQsFADB3MQswCQYDVQQGEwJMSzEQMA4GA1UE
+CBMHV2VzdGVybjEUMBIGA1UEBxMLS2lyaW5kaXdlbGExFDASBgNVBAoTC1B1c2hwYWxhbmthMRQw
+EgYDVQQLEwtQdXNocGFsYW5rYTEUMBIGA1UEAxMLUHVzaHBhbGFua2EwHhcNMTQwMjAxMDAxMjE5
+WhcNMTQwNTAyMDAxMjE5WjB3MQswCQYDVQQGEwJMSzEQMA4GA1UECBMHV2VzdGVybjEUMBIGA1UE
+BxMLS2lyaW5kaXdlbGExFDASBgNVBAoTC1B1c2hwYWxhbmthMRQwEgYDVQQLEwtQdXNocGFsYW5r
+YTEUMBIGA1UEAxMLUHVzaHBhbGFua2EwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCT
+nLRqYaA5DY79K3Qpzb/HJ7zS1fZ8MQqzZg6Uz/MKScvxWArQJsApUDC8mjJxAv2YZGQ8OZuK0d7T
+fgSin2Z7+wGM+iUtjp4QdD1ajhG284+/C0TZtsW/YPUgubYvhaE1bQsSRIavWs3q2lUiiIfwSaNN
+D0owu73oZPFWJIc0BUpn6DRwlljoEbO+wwVxlT95gFguZHD7QNS0nLdNn+F+SRY74z4wLrX15IOi
+oHSFFiz4vGpojfnLt4whLUwwDPtK0ah+aygpRHOjyGh9gSfjWsayrnAK6omGEdgYOs+kVy4mK6wj
+dJ5eBwy0GczCwhoq/a4do9Fs1ffVYS5pu6/pAgMBAAGjITAfMB0GA1UdDgQWBBT5NMnsUuee8I5h
+Dl16kKS0jJeAIDANBgkqhkiG9w0BAQsFAAOCAQEANrsL1SceWBGiHIp7T5FssvZB7bZ2qi46ajoi
+SK7Xjj8bvgYEC7dtt7UlY7wYl+/qe8StpX3i3ro3Zfao/PW6xpXKa2kKFRdmoPItH5QSG+n68Xe9
+aTBV/Jxl4h0uaLi0KWvrrCp65P+djvmxipjzqCPba043L7w2iUwHlOWILfDcHcQ5JqFZB+XcOuUQ
+t73+RqQ3fg1N77XKTOIFxHp2zuuHXw824ELR4ZmXMX+PHhjaQobcf8SRT8Lu4FRm4vwzFgpONNB9
+3IkkbqHAfoD+5oFjbLj9kyRqXfD/eY+XeIDyMQocRqTpcJIm8OneZ8vbMNQrxsRInxq+DsG+C92b
+1w==
+</ds:X509Certificate>
+</ds:X509Data>
+<ds:KeyValue>
+<ds:RSAKeyValue>
+<ds:Modulus>
+k5y0amGgOQ2O/St0Kc2/xye80tX2fDEKs2YOlM/zCknL8VgK0CbAKVAwvJoycQL9mGRkPDmbitHe
+034Eop9me/sBjPolLY6eEHQ9Wo4RtvOPvwtE2bbFv2D1ILm2L4WhNW0LEkSGr1rN6tpVIoiH8Emj
+TQ9KMLu96GTxViSHNAVKZ+g0cJZY6BGzvsMFcZU/eYBYLmRw+0DUtJy3TZ/hfkkWO+M+MC619eSD
+oqB0hRYs+LxqaI35y7eMIS1MMAz7StGofmsoKURzo8hofYEn41rGsq5wCuqJhhHYGDrPpFcuJius
+I3SeXgcMtBnMwsIaKv2uHaPRbNX31WEuabuv6Q==
+</ds:Modulus>
+<ds:Exponent>AQAB</ds:Exponent>
+</ds:RSAKeyValue>
+</ds:KeyValue>
+</ds:KeyInfo>
+</ds:Signature></soap:Header>
+    <soap:Body>
+        <pr:GetPriceResponse xmlns:pr="http://www.pushpalankajaya.com/prices">
+            <pr:Price>1.90</pr:Price>
+        </pr:GetPriceResponse>
+    </soap:Body>
+</soap:Envelope>

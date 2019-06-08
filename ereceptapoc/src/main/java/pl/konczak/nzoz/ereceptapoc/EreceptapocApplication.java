@@ -34,6 +34,7 @@ public class EreceptapocApplication
 
     private final ClientAuthorizationPoC clientAuthorizationPoC;
     private final SendEReceptaPoC sendEReceptaPoC;
+    private final SigningSoapMessageWithCertificate signingSoapMessageWithCertificate;
 
     public static void main(String[] args) {
         SpringApplication.run(EreceptapocApplication.class, args);
@@ -44,8 +45,11 @@ public class EreceptapocApplication
 //        first();
 //        second();
 //        third();
-        fourth();
+//         fourth();
+        fifth();
     }
+
+
 
     private void second() {
         try {
@@ -159,6 +163,15 @@ public class EreceptapocApplication
                     + cpve.getIndex());
             System.exit(1);
         }
+    }
+
+    private void fifth() {
+        try {
+            signingSoapMessageWithCertificate.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

@@ -1,0 +1,34 @@
+<soap:Envelope
+        xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:pj="http://www.pjxml.org/namespaces/messageHeader"
+        xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance"
+        xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+    <soap:Header>
+        <pj:MessageHeader pj:version="1.0" soap:mustUnderstand="1">
+            <pj:From>
+                <pj:PartyId pj:type="ABCDE">FUN</pj:PartyId>
+            </pj:From>
+            <pj:To>
+                <pj:PartyId pj:type="ABCDE">PARTY</pj:PartyId>
+            </pj:To>
+            <pj:CPAId>uri:www.pjxml.org/socialService/Ping</pj:CPAId>
+            <pj:ConversationId>FUN PARTY FUN 59c64t0087fg3kfs000003n9</pj:ConversationId>
+            <pj:Service>uri:www.pjxml.org/socialService/</pj:Service>
+            <pj:Action>Ping</pj:Action>
+            <pj:MessageData>
+                <pj:MessageId>FUN 59c64t0087fg3kfs000003n9</pj:MessageId>
+                <pj:Timestamp>2013-10-22T17:12:20</pj:Timestamp>
+            </pj:MessageData>
+        </pj:MessageHeader>
+        <pj:Via pj:id="59c64t0087fg3ki6000003na" pj:version="1.0" soap:mustUnderstand="1"
+                soap:actor="http://schemas.xmlsoap.org/soap/actor/next" pj:syncReply="False">
+            <pj:Service>uri:www.pjxml.org/socialService/</pj:Service>
+            <pj:Action>Ping</pj:Action>
+        </pj:Via>
+    </soap:Header>
+    <soap:Body>
+        <pr:GetPriceResponse xmlns:pr="http://www.pushpalankajaya.com/prices">
+            <pr:Price>1.90</pr:Price>
+        </pr:GetPriceResponse>
+    </soap:Body>
+</soap:Envelope>
