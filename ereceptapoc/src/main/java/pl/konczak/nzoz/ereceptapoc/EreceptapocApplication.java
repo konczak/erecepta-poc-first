@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Hex;
+import pl.konczak.nzoz.ereceptapoc.soaprequesttool.SignSOAPRequest;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -35,6 +36,7 @@ public class EreceptapocApplication
     private final ClientAuthorizationPoC clientAuthorizationPoC;
     private final SendEReceptaPoC sendEReceptaPoC;
     private final SigningSoapMessageWithCertificate signingSoapMessageWithCertificate;
+    private final SignSOAPRequest signSOAPRequest;
 
     public static void main(String[] args) {
         SpringApplication.run(EreceptapocApplication.class, args);
@@ -46,8 +48,10 @@ public class EreceptapocApplication
 //        second();
 //        third();
 //         fourth();
-        fifth();
+//         fifth();
+        six();
     }
+
 
 
 
@@ -172,6 +176,15 @@ public class EreceptapocApplication
             e.printStackTrace();
         }
 
+    }
+
+    private void six() {
+        try {
+            String sign = signSOAPRequest.sign();
+            System.out.println(sign);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:jws="http://your.application.namespace.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <jws:RequestObject>
+        <FirstRequestParam>value_for_first_request_param</FirstRequestParam>
+        <SecondRequestParam>value_for_second_request_param</SecondRequestParam>
+      </jws:RequestObject>
+   </soapenv:Body>
+</soapenv:Envelope>
