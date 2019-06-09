@@ -45,11 +45,11 @@ public class EreceptapocApplication
     @Override
     public void run(String... args) {
 //        first();
-//        second();
+       second();
 //        third();
 //         fourth();
 //         fifth();
-        six();
+//         six();
     }
 
 

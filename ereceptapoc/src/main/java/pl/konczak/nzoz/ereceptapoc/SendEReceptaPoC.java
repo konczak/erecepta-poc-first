@@ -11,6 +11,12 @@ import pl.konczak.nzoz.ereceptapoc.factory.ZapisReceptSoapRequestBodyTemplateFac
 import pl.konczak.nzoz.ereceptapoc.keystore.PrivateKeyData;
 import pl.konczak.nzoz.ereceptapoc.util.XmlHelper;
 
+import javax.xml.soap.MessageFactory;
+import javax.xml.soap.SOAPMessage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.Base64;
 
@@ -26,6 +32,7 @@ public class SendEReceptaPoC {
     private final ZapisReceptSoapRequestBodyTemplateFactory zapisReceptSoapRequestBodyTemplateFactory;
     private final ZapisReceptSoapRequestBodyFactory zapisReceptSoapRequestBodyFactory;
     private final CsiozClient csiozClient;
+    private final SignSoapMessageRequestAsCompany signSoapMessageRequestAsCompany;
 
     public void execute() throws Exception {
         String ereceptaTemplate = eReceptaTemplateFactory.getEReceptaTemplate();
@@ -58,7 +65,15 @@ public class SendEReceptaPoC {
 
         log.debug("soapRequestBody <{}>", soapRequestBody);
 
-        csiozClient.sendZapiszRecepty(soapRequestBody);
+        SOAPMessage soapMessage = convertStringToSoapMessage(soapRequestBody);
+
+        SOAPMessage signedSoapMessageRequest = signSoapMessageRequestAsCompany.signAsCompany(soapMessage);
+
+        String singedSoapRequestAsString = soapMessageToString(signedSoapMessageRequest);
+
+        log.debug("singedSoapRequestAsString <{}>", singedSoapRequestAsString);
+
+        csiozClient.sendZapiszRecepty(singedSoapRequestAsString);
     }
 
     private Document signAsDoctor(final Document xmlWithErecepta) throws Exception {
@@ -70,6 +85,34 @@ public class SendEReceptaPoC {
 
         return xmlSigner.sign(xmlWithErecepta);
 
+    }
+
+    private SOAPMessage convertStringToSoapMessage(final String soapRequestBody) throws Exception {
+        InputStream is = new ByteArrayInputStream(soapRequestBody.getBytes());
+        SOAPMessage request = MessageFactory.newInstance().createMessage(null, is);
+        return request;
+    }
+
+    public String soapMessageToString(final SOAPMessage message) {
+        String result = null;
+
+        if (message != null) {
+            ByteArrayOutputStream baos = null;
+            try {
+                baos = new ByteArrayOutputStream();
+                message.writeTo(baos);
+                result = baos.toString();
+            } catch (Exception e) {
+            } finally {
+                if (baos != null) {
+                    try {
+                        baos.close();
+                    } catch (IOException ioe) {
+                    }
+                }
+            }
+        }
+        return result;
     }
 
 }

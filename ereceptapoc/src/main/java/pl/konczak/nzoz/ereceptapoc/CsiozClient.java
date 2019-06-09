@@ -63,7 +63,7 @@ public class CsiozClient {
         StringEntity entity = new StringEntity(zapiszReceptyRequestBody);
         HttpPost httpPost = new HttpPost(URI.create(CSIOZ_OBSLUGA_RECEPT_WS));
         httpPost.setEntity(entity);
-        httpPost.addHeader("Content-Type", "Content-Type: text/xml; charset=UTF-8");
+        httpPost.addHeader("Content-Type", "Content-Type: application/soap+xml; charset=UTF-8");
 
         CloseableHttpClient httpclient = HttpClients.custom()
                 .setSSLContext(sslContext)
